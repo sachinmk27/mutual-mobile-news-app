@@ -1,0 +1,29 @@
+<div fxLayout="column" fxLayoutGap="10px">
+  <mat-card fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field>
+      <mat-select placeholder="Category" [(value)]="selectedCategory">
+        <mat-option>None</mat-option>
+
+        <mat-option *ngFor="let category of categories" [value]="category.value">
+          {{category.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Publisher" [(value)]="selectedPublisher">
+        <mat-option>None</mat-option>
+
+        <mat-option *ngFor="let pub of allPublishers" [value]="pub">
+          {{pub}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-icon-button (click)="sortArticles()">
+      <mat-icon>sort</mat-icon>
+    </button>
+  </mat-card>
+
+
+  <app-article *ngFor="let article of ( articles | category:selectedCategory | publisher: selectedPublisher)" [article]="article"></app-article>
+  <!-- <app-article *ngFor="let article of ( articles | article:selectedCategory:'Bloomberg')" [article]="article"></app-article> -->
+</div>
